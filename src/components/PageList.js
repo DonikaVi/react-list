@@ -36,6 +36,7 @@ function PageList() {
     const el = addEl(position);
     const state = [...data];
     state.push(el);
+    localStorage.setItem("list", JSON.stringify(state));
     setData(state);
   };
 
@@ -75,6 +76,7 @@ function PageList() {
     setData(state);
     setDragStarted({});
     setDragEntered({});
+    localStorage.setItem("list", JSON.stringify(state));
     setLoading(!loading);
   };
 
