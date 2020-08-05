@@ -15,3 +15,10 @@ export const generateArray = () => {
 export const addEl = (pos) => {
   return { position: pos, value: uuidv4() };
 };
+
+/**
+ * Save data to local storage
+ * @param data
+ */
+export const setDataState = (data) =>
+  localStorage.setItem("list", JSON.stringify(data));

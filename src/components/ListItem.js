@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { Form, ListGroup, ButtonGroup, Button, Col } from "react-bootstrap";
-
 function ListItem({
   item,
   dragStart,
@@ -9,12 +8,11 @@ function ListItem({
   dragOver,
   changeItem,
   deleteItem,
-  dragStarted
+  dragStarted,
 }) {
   const [input, setInput] = useState({});
   const [state, setState] = useState({});
   const [edit, setEdit] = useState(false);
-
 
   useEffect(() => {
     if (item.value !== state.value) {
@@ -30,12 +28,15 @@ function ListItem({
     setInput(state);
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = (e) => {
+    e.preventDefault();
     setEdit(false);
     changeItem(input);
   };
 
-  const className = `mb-2 ${dragStarted.position === item.position ? 'start-drag': ''}`;
+  const className = `mb-2 ${
+    dragStarted.position === item.position ? "start-drag" : ""
+  }`;
 
   return (
     <div
@@ -47,6 +48,7 @@ function ListItem({
       onDragEnter={(e) => dragEnter(e, item)}
       onDragOver={dragOver}
     >
+
       {!edit && (
         <ListGroup.Item onDoubleClick={() => setEdit(true)}>
           {state.value}

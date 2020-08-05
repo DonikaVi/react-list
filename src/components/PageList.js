@@ -6,7 +6,7 @@ import {
   Col,
   Button,
 } from "react-bootstrap";
-import { generateArray, addEl } from "../Utils";
+import {generateArray, addEl, setDataState} from "../Utils";
 import ListItem from "./ListItem";
 import Paginate from "./Pagination";
 
@@ -25,6 +25,7 @@ function PageList() {
   const onDragStart = (ev, item) => {
     setDragStarted(item);
     ev.dataTransfer.dropEffect = "move";
+
   };
 
   const numPages = () => {
@@ -36,8 +37,9 @@ function PageList() {
     const el = addEl(position);
     const state = [...data];
     state.push(el);
-    localStorage.setItem("list", JSON.stringify(state));
+    setDataState();
     setData(state);
+    setLoading(!loading);
   };
 
   const onPaginationClick = (value) => {
@@ -46,7 +48,7 @@ function PageList() {
   };
 
   const paginatedData = () => {
-    const perPage = numPages() || 10;
+    const perPage = 10;
     const from = page * perPage - perPage;
     const to = page * perPage;
     const items = data.slice(from, to);
@@ -76,7 +78,7 @@ function PageList() {
     setData(state);
     setDragStarted({});
     setDragEntered({});
-    localStorage.setItem("list", JSON.stringify(state));
+    setDataState();
     setLoading(!loading);
   };
 
@@ -85,16 +87,18 @@ function PageList() {
     const index = state.findIndex((el) => el.position === item.position);
     state[index] = item;
     setData(state);
-    localStorage.setItem("list", JSON.stringify(state));
+    setDataState();
     setLoading(!loading);
   };
+
+
 
   const deleteItem = (item) => {
     const state = [...data];
     const index = state.findIndex((el) => el.position === item.position);
     state.splice(index, 1);
     setData(state);
-    localStorage.setItem("list", JSON.stringify(state));
+    setDataState()
     setLoading(!loading);
   };
 
@@ -115,7 +119,6 @@ function PageList() {
 
   const state = [...showData];
   const sorted = state.sort((a, b) => a.position > b.position);
-
   return (
     <Container className="mt-5">
       <Row>
