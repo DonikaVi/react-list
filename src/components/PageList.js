@@ -37,7 +37,7 @@ function PageList() {
     const el = addEl(position);
     const state = [...data];
     state.push(el);
-    setDataState();
+    setDataState(state);
     setData(state);
     setLoading(!loading);
   };
@@ -78,7 +78,7 @@ function PageList() {
     setData(state);
     setDragStarted({});
     setDragEntered({});
-    setDataState();
+    setDataState(state);
     setLoading(!loading);
   };
 
@@ -87,7 +87,7 @@ function PageList() {
     const index = state.findIndex((el) => el.position === item.position);
     state[index] = item;
     setData(state);
-    setDataState();
+    setDataState(state);
     setLoading(!loading);
   };
 
@@ -96,7 +96,7 @@ function PageList() {
     const index = state.findIndex((el) => el.position === item.position);
     state.splice(index, 1);
     setData(state);
-    setDataState()
+    setDataState(state);
     setLoading(!loading);
   };
 
