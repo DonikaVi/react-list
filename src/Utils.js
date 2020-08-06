@@ -13,7 +13,7 @@ export const generateArray = () => {
 };
 
 export const addEl = (pos) => {
-  return { position: pos, value: uuidv4() };
+  return { position: getRandomInt(pos), value: uuidv4() };
 };
 
 /**
@@ -21,4 +21,10 @@ export const addEl = (pos) => {
  * @param data
  */
 export const setDataState = (data) =>
-  localStorage.setItem("list", JSON.stringify(data));
+  data && localStorage.setItem("list", JSON.stringify(data));
+
+function getRandomInt(min) {
+  const max = 9999;
+  min = Math.ceil(min);
+  return Math.floor(Math.random() * (max - min)) + min;
+}
