@@ -91,8 +91,6 @@ function PageList() {
     setLoading(!loading);
   };
 
-
-
   const deleteItem = (item) => {
     const state = [...data];
     const index = state.findIndex((el) => el.position === item.position);
@@ -117,14 +115,12 @@ function PageList() {
     setLoading(!loading);
   }, []);
 
-  const state = [...showData];
-  const sorted = state.sort((a, b) => a.position > b.position);
   return (
     <Container className="mt-5">
       <Row>
         <Col md={{ span: 8, offset: 2 }}>
           <ListGroup>
-            {sorted.map((item) => (
+            {showData.map((item) => (
               <ListItem
                 key={item.position}
                 dragStart={onDragStart}
